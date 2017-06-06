@@ -7,5 +7,6 @@
  */
 
 return [
-    "api_key"   =>      "AIzaSyDjGdqf-qmvg6u59i8G8B_ALjCpEhSPIyE"
+    "app_name"      =>      "pmc-api-adapter",
+    "email"         =>      "chris.rocco7@gmail.com"
 ];

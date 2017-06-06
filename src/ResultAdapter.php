@@ -2,51 +2,48 @@
 /**
  * Created by PhpStorm.
  * User: chris
- * Date: 6/1/2017
- * Time: 8:00 PM
+ * Date: 6/6/2017
+ * Time: 2:50 PM
  */
 
-namespace vector\Geocoder;
+namespace vector\PMCAdapter;
 
+
+use Author;
 
 class ResultAdapter
 {
-    protected $googleResult;
+    private $pmc_result_paper;
+    private $parsed;
 
-    private $formatted_address;
-    private $coordinate;
-
-    /**
-     * @return mixed
-     */
-    public function getCoordinate()
+    function __construct( $pmc_result_paper )
     {
-        return $this->coordinate;
+        $this->pmc_result_paper = $pmc_result_paper;
+        $this->parsed = [
+            "publication_date"  =>  $pmc_result_paper['pubdate'],
+            "title"  =>  $pmc_result_paper['title'],
+            "pages"  =>  $pmc_result_paper['pages'],
+            "journal_name"  =>  $pmc_result_paper['fulljournalname'],
+        ];
+
+        foreach ( $pmc_result_paper['authors'] as $author ){
+            $this->parsed['authors'][] = new PMCAuthor( $author['name'], $author['authtype'] );
+        }
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFormattedAddress()
-    {
-        return $this->formatted_address;
+    public function getTitle(){
+        return $this->parsed['title'];
     }
 
-    /**
-     * @param mixed $formatted_address
-     */
-    public function setFormattedAddress($formatted_address)
-    {
-        $this->formatted_address = $formatted_address;
+    public function getPublicationDate(){
+        return $this->parsed['publication_date'];
     }
 
-    function __construct( $googleResult ){
-        // Depends on..
-        // Google Geocoder API: https://developers.google.com/maps/documentation/geocoding/start
-        $this->googleResult =           $googleResult;
-        $this->setFormattedAddress(     $googleResult['formatted_address'] );
-        $lat =                          $googleResult['geometry']['location']['lat'];
-        $lng =                          $googleResult['geometry']['location']['lng'];
-        $this->coordinate = new Coordinate( $lat, $lng );
+    public function getJournalName(){
+        return $this->parsed['journal_name'];
+    }
+
+    public function getAuthors(){
+        return $this->parsed['authors'];
     }
 }

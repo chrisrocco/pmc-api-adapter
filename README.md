@@ -1,32 +1,34 @@
-Google Maps Geocoder PHP Wrapper
+PubMed Central API PHP Wrapper
 =========================
 
 <h3>So you dont have to think about it!</h3>
-A straightforward, reliable, PHP wrapper for consuming the Google Geocoding API.
+A straightforward, reliable, PHP wrapper for consuming the PubMed Central API.
 
 How to Use
 --------
 <ol>
-    <li><strong>Construct a Geocoder with your google api_key</strong>
+    <li><strong>Construct a PMCAdapter with your app's name and your support email</strong>
         <br/>
         <code>
-            new Geocoder( "your_api_key" );
+            $adapter = new PMCAdapter( "your_app_name", "your_email" );
         </code>
     </li>
-    <li><strong>Run a search or get the first match</strong>
+    <li><strong>Lookup an article by it's PMC-ID</strong>
         <br/>
         <code>
-            $search = "Innovation Depot Birmingham";
-            <br>
-            $result = $geocoder->firstResult( $search );
+            $result = $adapter->lookupPMCID( 3539452 );
         </code>
     </li>
     <li><strong>Interact with the data through the <em>ResultAdapter object</em></strong>
         <br/>
         <code>
-            $result->getCoordinate();
+            $result->getTitle();
             <br/>
-            $result->getFormattedAddress();
+            $result->getAuthors();
+            <br/>
+            $result->getPublicationDate();
+            <br/>
+            $result->getJournalName();
         </code>
     </li>
 </ol>

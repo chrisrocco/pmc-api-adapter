@@ -1,7 +1,7 @@
 {
-    "name": "vector/google-geocoder-adapter",
-    "description": "A PHP wrapper for the Google Maps Geocoding API. So you don't have to think about it!",
-    "keywords": [ "google", "api", "wrapper", "geocoding", "php", "package"],
+    "name": "vector/pmc-api-adapter",
+    "description": "A PHP wrapper for consuming the PubMedCentral API. So you don't have to think about it!",
+    "keywords": [ "PubMed", "api", "wrapper", "API", "php", "package"],
     "license": "",
     "authors": [
         {
@@ -18,7 +18,7 @@
     },
 	"autoload": {
         "psr-4": {
-            "vector\\Geocoder\\": "src/"
+            "vector\\PMCAdapter\\": "src/"
         }
     }
 }
