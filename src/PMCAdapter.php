@@ -22,7 +22,13 @@ class PMCAdapter
         "db=pmc",
         "retmode=json",
     ];
+    const EMBEDDING_URL = "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC";
+
     private $application_params;
+
+    static function getEmbeddingURL( $pmcID ){
+        return self::EMBEDDING_URL . $pmcID;
+    }
 
     function __construct( $application_name, $maintainer_email )
     {
